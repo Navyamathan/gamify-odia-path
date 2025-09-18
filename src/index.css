@@ -17,8 +17,8 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 258 100% 75%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -36,7 +36,25 @@ All colors MUST be HSL.
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Gamification Colors */
+    --streak-orange: 25 100% 60%;
+    --star-blue: 214 100% 65%;
+    --coin-green: 152 69% 50%;
+    --level-purple: 271 100% 65%;
+
+    /* App Gradients */
+    --gradient-main: linear-gradient(135deg, hsl(258 100% 75%) 0%, hsl(214 100% 65%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(258 100% 95%) 0%, hsl(214 100% 95%) 100%);
+    --gradient-button: linear-gradient(135deg, hsl(258 100% 65%) 0%, hsl(214 100% 55%) 100%);
+
+    /* Shadows */
+    --shadow-card: 0 10px 30px -10px hsl(258 100% 75% / 0.3);
+    --shadow-button: 0 8px 25px -8px hsl(258 100% 75% / 0.4);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +119,40 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .gradient-main {
+    background: var(--gradient-main);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .gradient-button {
+    background: var(--gradient-button);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-button {
+    box-shadow: var(--shadow-button);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .brain-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
   }
 }

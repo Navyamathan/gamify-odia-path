@@ -1,13 +1,65 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { LanguageProvider } from "@/components/LanguageContext";
+import { Landing } from "@/components/Landing";
+import { Onboarding, UserData } from "@/components/Onboarding";
+import { Dashboard } from "@/components/Dashboard";
+import { LevelMap } from "@/components/LevelMap";
+
+type AppState = 'landing' | 'onboarding' | 'dashboard' | 'levelMap';
 
 const Index = () => {
+  const [appState, setAppState] = useState<AppState>('landing');
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [selectedSubject, setSelectedSubject] = useState<string>('');
+
+  const handleGetStarted = () => {
+    setAppState('onboarding');
+  };
+
+  const handleOnboardingComplete = (data: UserData) => {
+    setUserData(data);
+    setAppState('dashboard');
+  };
+
+  const handleSubjectSelect = (subject: string) => {
+    setSelectedSubject(subject);
+    setAppState('levelMap');
+  };
+
+  const handleBackToDashboard = () => {
+    setAppState('dashboard');
+  };
+
+  const handleLevelSelect = (level: number) => {
+    // This would navigate to the actual lesson/game
+    console.log(`Selected level ${level} in ${selectedSubject}`);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <LanguageProvider>
+      {appState === 'landing' && (
+        <Landing onGetStarted={handleGetStarted} />
+      )}
+      
+      {appState === 'onboarding' && (
+        <Onboarding onComplete={handleOnboardingComplete} />
+      )}
+      
+      {appState === 'dashboard' && userData && (
+        <Dashboard 
+          userData={userData} 
+          onSubjectSelect={handleSubjectSelect}
+        />
+      )}
+      
+      {appState === 'levelMap' && (
+        <LevelMap 
+          subject={selectedSubject}
+          onBack={handleBackToDashboard}
+          onLevelSelect={handleLevelSelect}
+        />
+      )}
+    </LanguageProvider>
   );
 };
 

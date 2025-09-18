@@ -47,6 +47,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Gamification colors
+        streak: "hsl(var(--streak-orange))",
+        star: "hsl(var(--star-blue))",
+        coin: "hsl(var(--coin-green))",
+        level: "hsl(var(--level-purple))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
